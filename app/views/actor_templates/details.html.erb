@@ -62,21 +62,23 @@
 <% @filmography.each do |a_movie| %>
   
   <tr>
-    <td><%= a_movie.id %></td>
+    <td>
+      <% mov = Movie.where({ :id => a_movie.movie_id }).at(0) %>
+      <%= mov.title %>
+    </td>
 
     <td>
       
     </td>
-    
-    <td><%= a_movie.title %> </td>
+  
     
     <td>
-      <% d = Director.where({ :id => a_movie.director_id }).at(0) %>
+            <% d = Director.where({ :id => mov.director_id }).at(0) %>
       <%= d.name %>
     </td>
     
     <td>
-      <% char = Character.where({ :actor_id => @the_actor.id , :movie_id => a_movie.id }).at(0) %>
+      <% char = Character.where({ :actor_id => @the_actor.id , :movie_id => mov.id }).at(0) %>
       <%= char.name %>
     </td>
 
