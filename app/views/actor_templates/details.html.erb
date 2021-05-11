@@ -59,12 +59,13 @@
 <hr>
 
 <table border="1">
-<% @filmography.each do |a_movie| %>
+<% @filmography.each do |a_char| %>
   
   <tr>
     <td>
-      <% mov = Movie.where({ :id => a_movie.movie_id }).at(0) %>
-      <%= mov.title %>
+      <% mov = Movie.where({ :id => a_char.movie_id }).at(0) %>
+        <%= mov.title %>
+        
     </td>
 
     <td>
@@ -78,12 +79,14 @@
     </td>
     
     <td>
-      <% char = Character.where({ :actor_id => @the_actor.id , :movie_id => mov.id }).at(0) %>
-      <%= char.name %>
+      <% char = Character.where({ :actor_id => @the_actor.id , :movie_id => mov.id }) %>
+      <% char.each do | charlist |%>
+      <%= charlist.name %>
+      <% end %>
     </td>
 
     <td>
-     <a href="/movies/<%= a_movie.id %>">
+     <a href="/movies/<%= a_char.id %>">
         Show details
     </td>
   </tr>
